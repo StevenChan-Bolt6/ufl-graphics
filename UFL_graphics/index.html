@@ -33,6 +33,7 @@
             color: white;
             font-family: Tungsten-Book;
             display: inline-grid;
+            align-content: space-evenly;
             align-items: center;
             text-align: center;
         }
@@ -41,7 +42,7 @@
             display: inline-block;
         }
         .title{
-            font-size: 15vw;
+            font-size: 14vw;
             letter-spacing: 5px;
             width: 100%;
             white-space: nowrap;
@@ -49,7 +50,7 @@
     </style>
     <div id="app">
         <div>
-            <span id="standby" class="title" style="font-size: 30vw;">{{ standbyText }}</span>
+            <span id="standby" class="title" style="font-size: 30vw;" v-show="showStandby">{{ standbyText }}</span>
             <span id="line1" class="title">{{ line1Text }}</span>
             <span id="line2" class="title">{{ line2Text }}</span>
         </div>
@@ -85,6 +86,7 @@
         new Vue({
             el: '#app',
             data: {
+                showStandby: true,
                 standbyText: "STANDBY",
                 line1Text: "",
                 line2Text: "",
@@ -95,15 +97,57 @@
             },
             methods: {
                 setText(downJson) {
-                    this.standbyText = ""
-                    this.line1Text = "SHORT BY xxx INCHES"
-                    this.line2Text = "SECOND DOWN"
+                    downJson = JSON.parse(downJson)
+                    var _line1Text = "-NO DATA-"
+                    var _line2Text = "DOWN" ;
+                    switch (downJson.downNumber) {
+                      case 2:
+                        _line1Text = `SHORT BY ${this.handleDistance(downJson.downToLineToGain.yards)}`
+                        _line2Text = "SECOND DOWN"
+                        break;
+                      case 3:
+                        _line1Text = `SHORT BY ${this.handleDistance(downJson.downToLineToGain.yards)}`
+                        _line2Text = "THIRD DOWN"
+                        break;
+                      case 4:
+                        _line1Text = `SHORT BY ${this.handleDistance(downJson.downToLineToGain.yards)}`
+                        _line2Text = "FOURTH DOWN"
+                        break;
+                    }
+                    if (downJson.downNumber == 1 && downJson.lastSeriesResult != null){
+                        if (downJson.lastSeriesResult.distanceOverLineToGain.yards < 0){
+                            _line1Text = `SHORT BY ${this.handleDistance(downJson.lastSeriesResult.distanceOverLineToGain.yards)}`
+                            _line2Text = "TURNOVER ON DOWNS"
+                        }else{
+                            if (downJson.lastSeriesResult.downToGoal.yards < 0){
+                                _line1Text = `OVER BY ${this.handleDistance(downJson.lastSeriesResult.downToGoal.yards)}`
+                                _line2Text = "TOUCH DOWN"
+                            }else{
+                                _line1Text = `OVER BY ${this.handleDistance(downJson.lastSeriesResult.distanceOverLineToGain.yards)}`
+                                _line2Text = "FIRST DOWN"
+                            }
+                        }
+                    }
+                    this.showStandby = false
+                    this.line1Text = _line1Text
+                    this.line2Text = _line2Text
+                    console.log(this.line1Text)
+                    console.log(this.line2Text)
                 },
                 resetText(){
                     console.log('Resetting Text')
-                    this.standbyText = "STANDBY"
+                    this.showStandby = true
                     this.line1Text = ""
                     this.line2Text = ""
+                },
+                handleDistance(yards){
+                    yards = Math.abs(yards)
+                    if (yards<1){
+                        var inches = Math.round((yards*36) * 1000) / 1000
+                        return `${inches} INCHES`
+                    }else{
+                        return `${yards} YARDS`
+                    }
                 },
                 handleNatsMessage(payload){
                     console.log(`Received message with payload: ${payload}`)
@@ -128,7 +172,7 @@
 
                 this.defaultTimeout = params.get("timeout")
                 if (this.defaultTimeout == null) {
-                    this.defaultTimeout = 15
+                    this.defaultTimeout = 10
                 } else {
                     this.defaultTimeout = Number(this.defaultTimeout)
                 }
