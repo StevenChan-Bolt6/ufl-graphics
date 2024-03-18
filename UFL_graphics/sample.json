@@ -1,0 +1,150 @@
+http://graphics.ufl.bolt6.cloud.s3.us-east-2.amazonaws.com/index.html?nats_ws_broker=ws://k8s-detroit-traefike-3846e49a13-e373270b70813bf2.elb.us-east-2.amazonaws.com:4223&nats_topic=external.ball-spotting
+
+{
+    "completedSeriesInDrive": 1,
+    "description": "Philadelphia Stars @ Michigan Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-18T06:55:14.652Z",
+    "downToGoal": {
+        "meters": -12.177,
+        "yards": -13.317
+    },
+    "downToLineToGain": {
+        "meters": -12.177,
+        "yards": -13.317
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": 12.177,
+            "yards": 13.317
+        },
+        "downToGoal": {
+            "meters": -12.177,
+            "yards": -13.317
+        },
+        "lineToGainToGoal": {
+            "meters": 0.0,
+            "yards": 0.0
+        },
+        "offensiveDirection": "Right to Left",
+        "offensiveTeam": "Philadelphia Stars"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Right to Left",
+    "offensiveTeam": "Philadelphia Stars",
+    "seriesStartPositionToGoal": {
+        "meters": -12.177,
+        "yards": -13.317
+    }
+}
+
+{
+    "completedSeriesInDrive": 0,
+    "description": "Philadelphia Stars @ Michigan Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-18T07:06:33.020Z",
+    "downToGoal": {
+        "meters": 11.892,
+        "yards": 13.006
+    },
+    "downToLineToGain": {
+        "meters": 9.144,
+        "yards": 10.0
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": 12.177,
+            "yards": 13.317
+        },
+        "downToGoal": {
+            "meters": -12.177,
+            "yards": -13.317
+        },
+        "lineToGainToGoal": {
+            "meters": 0.0,
+            "yards": 0.0
+        },
+        "offensiveDirection": "Right to Left",
+        "offensiveTeam": "Philadelphia Stars"
+    },
+    "lineToGainToGoal": {
+        "meters": 2.748,
+        "yards": 3.006
+    },
+    "offenseDirection": "Left to Right",
+    "offensiveTeam": "Michigan Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": 11.892,
+        "yards": 13.006
+    }
+}
+
+{
+    "completedSeriesInDrive": 0,
+    "description": "Philadelphia Stars @ Michigan Panthers - YYYY/MM/DD",
+    "downNumber": 4,
+    "downTime": "2024-03-18T07:06:56.957Z",
+    "downToGoal": {
+        "meters": 11.892,
+        "yards": 13.006
+    },
+    "downToLineToGain": {
+        "meters": 9.144,
+        "yards": 10.0
+    },
+    "lastSeriesResult": null,
+    "lineToGainToGoal": {
+        "meters": 2.748,
+        "yards": 3.006
+    },
+    "offenseDirection": "Left to Right",
+    "offensiveTeam": "Michigan Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": 11.892,
+        "yards": 13.006
+    }
+}
+
+{
+    "completedSeriesInDrive": 0,
+    "description": "Philadelphia Stars @ Michigan Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-18T07:07:14.574Z",
+    "downToGoal": {
+        "meters": -12.177,
+        "yards": -13.317
+    },
+    "downToLineToGain": {
+        "meters": -12.177,
+        "yards": -13.317
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": -9.144,
+            "yards": -10.0
+        },
+        "downToGoal": {
+            "meters": 11.892,
+            "yards": 13.006
+        },
+        "lineToGainToGoal": {
+            "meters": 2.748,
+            "yards": 3.006
+        },
+        "offensiveDirection": "Left to Right",
+        "offensiveTeam": "Michigan Panthers"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Right to Left",
+    "offensiveTeam": "Philadelphia Stars",
+    "seriesStartPositionToGoal": {
+        "meters": -12.177,
+        "yards": -13.317
+    }
+}

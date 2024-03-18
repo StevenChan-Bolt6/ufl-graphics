@@ -18,20 +18,20 @@
         }
 
         @font-face {
-            font-family: 'VTFRedzone-ClassicOblique';
-            src: url("./fonts/VTFRedzone-ClassicOblique.ttf") format("truetype");
+            font-family: 'Tungsten-Book';
+            src: url("./fonts/Tungsten-Book.otf") format("opentype");
         }
         @font-face {
-            font-family: 'VTFRedzone-Classic';
-            src: url("./fonts/VTFRedzone-Classic.ttf") format("truetype");
-        }
-
-        .italics {
-            font-family: 'VTFRedzone-ClassicOblique';
+            font-family: 'Tungsten-Bold';
+            src: url("./fonts/Tungsten-Bold.otf") format("opentype");
         }
 
         .regular {
-            font-family: 'VTFRedzone-Classic';
+            font-family: 'Tungsten-Book';
+        }
+
+        .regular {
+            font-family: 'Tungsten-Bold';
         }
 
         html {
@@ -45,7 +45,7 @@
             height: 100%;
             padding: 0;
             margin: 0;
-            font-family: 'VTFRedzone-Classic';
+            font-family: 'Tungsten-Bold';
             font-size: 14px;
             font-weight: 400;
             overflow: hidden;
@@ -61,35 +61,41 @@
         }
 
         .outer-container {
+            background-image: url(images/lower-third-bg-brown.png);
+            background-size: 100% 100%;
             position: fixed;
-            top: 680px;
+            top: 700px;
             left: 50%;
             transform: translate(-50%, 0%);
-            width: 1550px;
+            width: 1600px;
             height: 300px;
-            border: 7.5px solid #0000FF;
+            padding-top: 40px;
+            padding-bottom: 30px;
             display: inline-grid;
             align-items: center;
             text-align: center;
-            background-color: #ED1C24;
-            opacity: 0.75;
-
         }
 
         .title {
             position: relative;
             width: 100%;
-            top: -10px;
             color: #141414;
             z-index: 2;
-            font-family: 'VTFRedzone-Classic';
-            font-size: 130px;
+            font-family: 'Tungsten-Bold';
+            letter-spacing: 5px;
+            line-height:100%;
+            font-size: 125px;
             color:white;
             text-shadow:
-            -2px -2px 0 #0000FF,
-            2px -2px 0 #0000FF,
-            -2px 2px 0 #0000FF,
-            2px 2px 0 #0000FF;
+            -2px -2px 0 #000000,
+            2px -2px 0 #000000,
+            -2px 2px 0 #000000,
+            2px 2px 0 #000000;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .larger{
+            font-size: 125%;
         }
 
 
@@ -98,10 +104,10 @@
     <div class="placeholder">
         <div class="outer-container">
             <span class="title">
-                SHORT BY xxx INCHES
+                SHORT BY 12.3 INCHES
             </span>
             <span class="title">
-                THIRD DOWN!
+                THIRD DOWN
             </span>
         </div>
     </div>

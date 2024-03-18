@@ -19,20 +19,20 @@
         }
 
         @font-face {
-            font-family: 'Tungsten-Book';
-            src: url("{% static '/fonts/Tungsten-Book.otf' %}") format("opentype");
+            font-family: 'VTFRedzone-ClassicOblique';
+            src: url("{% static '/fonts/VTFRedzone-ClassicOblique.ttf' %}") format("truetype");
         }
         @font-face {
-            font-family: 'Tungsten-Bold';
-            src: url("{% static '/fonts/Tungsten-Bold.otf' %}") format("opentype");
+            font-family: 'VTFRedzone-Classic';
+            src: url("{% static '/fonts/VTFRedzone-Classic.ttf' %}") format("truetype");
+        }
+
+        .italics {
+            font-family: 'VTFRedzone-ClassicOblique';
         }
 
         .regular {
-            font-family: 'Tungsten-Book';
-        }
-
-        .regular {
-            font-family: 'Tungsten-Bold';
+            font-family: 'VTFRedzone-Classic';
         }
 
         html {
@@ -46,7 +46,7 @@
             height: 100%;
             padding: 0;
             margin: 0;
-            font-family: 'Tungsten-Bold';
+            font-family: 'VTFRedzone-Classic';
             font-size: 14px;
             font-weight: 400;
             overflow: hidden;
@@ -62,53 +62,43 @@
         }
 
         .outer-container {
-            background-image: url("{% static '/images/lower-third-bg-brown.png' %}");
-            background-size: 100% 100%;
             position: fixed;
-            top: 700px;
+            top: 680px;
             left: 50%;
             transform: translate(-50%, 0%);
-            width: 1600px;
+            width: 1550px;
             height: 300px;
-            padding-top: 40px;
-            padding-bottom: 30px;
+            border: 7.5px solid #0000FF;
             display: inline-grid;
             align-items: center;
             text-align: center;
+            background-color: #ED1C24;
+            opacity: 0.75;
+
         }
 
         .title {
             position: relative;
             width: 100%;
+            top: -20px;
             color: #141414;
             z-index: 2;
-            font-family: 'Tungsten-Bold';
-            letter-spacing: 5px;
-            line-height:100%;
-            font-size: 125px;
+            font-family: 'VTFRedzone-Classic';
+            font-size: 250px;
             color:white;
             text-shadow:
-            -2px -2px 0 #000000,
-            2px -2px 0 #000000,
-            -2px 2px 0 #000000,
-            2px 2px 0 #000000;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            -2px -2px 0 #0000FF,
+            2px -2px 0 #0000FF,
+            -2px 2px 0 #0000FF,
+            2px 2px 0 #0000FF;
         }
-        .larger{
-            font-size: 125%;
-        }
-
 
     </style>
     
     <div class="placeholder">
         <div class="outer-container">
             <span class="title">
-                SHORT BY {{ inches }} INCHES
-            </span>
-            <span class="title">
-                SECOND DOWN
+                {{ line1 }}
             </span>
         </div>
     </div>

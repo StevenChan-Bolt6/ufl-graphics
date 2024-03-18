@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,11 +19,11 @@
 
         @font-face {
             font-family: 'Tungsten-Book';
-            src: url("{% static '/fonts/Tungsten-Book.otf' %}") format("opentype");
+            src: url("./fonts/Tungsten-Book.otf") format("opentype");
         }
         @font-face {
             font-family: 'Tungsten-Bold';
-            src: url("{% static '/fonts/Tungsten-Bold.otf' %}") format("opentype");
+            src: url("./fonts/Tungsten-Bold.otf") format("opentype");
         }
 
         .regular {
@@ -62,7 +61,7 @@
         }
 
         .outer-container {
-            background-image: url("{% static '/images/lower-third-bg-brown.png' %}");
+            background-image: url(images/lower-third-bg-brown.png);
             background-size: 100% 100%;
             position: fixed;
             top: 700px;
@@ -105,10 +104,10 @@
     <div class="placeholder">
         <div class="outer-container">
             <span class="title">
-                SHORT BY {{ inches }} INCHES
+                Official trU Line
             </span>
             <span class="title">
-                SECOND DOWN
+                Measurement
             </span>
         </div>
     </div>

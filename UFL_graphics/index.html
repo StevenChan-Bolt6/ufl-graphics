@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body style="padding: 0; margin: 0;">
+    <style type="text/css">
+        @font-face {
+            font-family: 'Tungsten-Book';
+            src: url("./fonts/Tungsten-Book.otf") format("opentype");
+        }
+        @font-face {
+            font-family: 'Tungsten-Bold';
+            src: url("./fonts/Tungsten-Bold.otf") format("opentype");
+        }
+
+        .regular {
+            font-family: 'Tungsten-Book';
+        }
+
+        .regular {
+            font-family: 'Tungsten-Bold';
+        }
+
+        #app{
+            height: 100vh; 
+            width: 100vw; 
+            padding: 0; 
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: Tungsten-Book;
+            display: inline-grid;
+            align-items: center;
+            text-align: center;
+        }
+        .logo{
+            height: 7.5vw;
+            display: inline-block;
+        }
+        .title{
+            font-size: 15vw;
+            letter-spacing: 5px;
+            width: 100%;
+            white-space: nowrap;
+        }
+    </style>
+    <div id="app">
+        <div>
+            <span id="standby" class="title" style="font-size: 30vw;">{{ standbyText }}</span>
+            <span id="line1" class="title">{{ line1Text }}</span>
+            <span id="line2" class="title">{{ line2Text }}</span>
+        </div>
+        <div style="width:100%;margin: 0 auto;">
+            <img id="ulf-logo" class="logo" src="images/ufl-logo-white.png">
+            <div id="vr" style="border-left:2px solid #FFF;width: 1px;margin-left: 2.5vw;margin-right: 2.5vw;" class="logo" ></div>
+            <img id="ulf-logo" class="logo" src="images/bolt6-logo-white.png">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script type="module">
+        import { connect, StringCodec } from "/js/nats.js"
+
+        const natsInit = async function (connectionURL, topic, callback) {
+            console.log(`Connecting to Nats: ${connectionURL}`)
+            const conn = await connect({
+                servers: connectionURL
+            }) 
+
+            console.log(`Connected to Nats: ${connectionURL}`)
+            const sc = StringCodec()
+            const sub = conn.subscribe(topic)
+
+            console.log(`subscribing on topic: ${topic}`)
+
+            console.log(`Waiting for messages`)
+            for await (const m of sub) {
+                callback(sc.decode(m.data))
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            data: {
+                standbyText: "STANDBY",
+                line1Text: "",
+                line2Text: "",
+                defaultTimeout: 0,
+                defaultNatsServer: "",
+                defaultNatsTopic: "",
+                timeout: null
+            },
+            methods: {
+                setText(downJson) {
+                    this.standbyText = ""
+                    this.line1Text = "SHORT BY xxx INCHES"
+                    this.line2Text = "SECOND DOWN"
+                },
+                resetText(){
+                    console.log('Resetting Text')
+                    this.standbyText = "STANDBY"
+                    this.line1Text = ""
+                    this.line2Text = ""
+                },
+                handleNatsMessage(payload){
+                    console.log(`Received message with payload: ${payload}`)
+
+                    try {
+                        clearTimeout(this.timeout)
+                    } catch (err) {
+                        console.log(err)
+                    }
+
+                    this.setText(payload)
+
+                    console.log(`Text updated, text will auto reset in ${this.defaultTimeout}s`)
+
+                    this.timeout = setTimeout(this.resetText, this.defaultTimeout*1000)
+                }
+            },
+            created() {
+                //get query params
+                let uri = window.location.search.substring(1);
+                let params = new URLSearchParams(uri);
+
+                this.defaultTimeout = params.get("timeout")
+                if (this.defaultTimeout == null) {
+                    this.defaultTimeout = 15
+                } else {
+                    this.defaultTimeout = Number(this.defaultTimeout)
+                }
+
+                this.defaultNatsServer = params.get("nats_ws_broker")
+                if (this.defaultNatsServer == null) {
+                    this.defaultNatsServer = "ws://localhost:4223"
+                }
+
+                this.defaultNatsTopic = params.get("nats_topic")
+                if (this.defaultNatsTopic == null) {
+                    this.defaultNatsTopic = "external.ball-spotting"
+                }
+
+                natsInit(this.defaultNatsServer, this.defaultNatsTopic, this.handleNatsMessage)
+                    .catch(err => {
+                        console.log(err)
+                    })
+            },
+        })
+    </script>
+</body>
+
+</html>
