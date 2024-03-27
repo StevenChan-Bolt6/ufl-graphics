@@ -143,9 +143,10 @@
                 handleDistance(yards){
                     yards = Math.abs(yards)
                     if (yards<1){
-                        var inches = Math.round((yards*36) * 1000) / 1000
+                        var inches = Math.round((yards*36) * 10) / 10
                         return `${inches} INCHES`
                     }else{
+                        var yards = Math.round(yards)
                         return `${yards} YARDS`
                     }
                 },
