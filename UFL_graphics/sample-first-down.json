@@ -1,0 +1,407 @@
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": -6.780297615364452,
+            "y": 24.630852133371327,
+            "z": 0.08525000000000382
+        },
+        "posPitchCoords": {
+            "x": 22.211036992197187,
+            "y": 15.625520546929389,
+            "z": -7.217852032284202
+        }
+    },
+    "completedSeriesInDrive": 0,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-30T07:10:08.346Z",
+    "downToGoal": {
+        "meters": 22.069,
+        "yards": 24.134
+    },
+    "downToLineToGain": {
+        "meters": 9.144,
+        "yards": 10.0
+    },
+    "lastSeriesResult": null,
+    "lineToGainToGoal": {
+        "meters": 12.925,
+        "yards": 14.134
+    },
+    "offenseDirection": "Left to Right",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": 22.069,
+        "yards": 24.134
+    }
+}
+
+--After 4th down - turnover
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": -2.8257205098523173,
+            "y": 21.414783776872156,
+            "z": 0.0852499999999985
+        },
+        "posPitchCoords": {
+            "x": -17.140624960524438,
+            "y": -128.68145957914598,
+            "z": 6.164998889844391
+        }
+    },
+    "completedSeriesInDrive": 0,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-30T07:29:27.984Z",
+    "downToGoal": {
+        "meters": -17.283,
+        "yards": -18.901
+    },
+    "downToLineToGain": {
+        "meters": -17.283,
+        "yards": -18.901
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": -3.732,
+            "yards": -4.082
+        },
+        "downToGoal": {
+            "meters": 16.998,
+            "yards": 18.589
+        },
+        "finalBallCentrePos": {
+            "posGlobalCoords": {
+                "x": -3.69864244152434,
+                "y": 22.156892675914555,
+                "z": 0.08525000000000382
+            },
+            "posPitchCoords": {
+                "x": 18.282624212747958,
+                "y": 15.274667261490084,
+                "z": -7.465942769619914
+            }
+        },
+        "lineToGainToGoal": {
+            "meters": 13.266,
+            "yards": 14.508
+        },
+        "offensiveDirection": "Left to Right",
+        "offensiveTeam": "Michigan_Panthers"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Right to Left",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": -17.283,
+        "yards": -18.901
+    }
+}
+
+
+-- Turn over mid-drive
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": -3.6523210846106338,
+            "y": 17.447522172598255,
+            "z": 0.08525000000000382
+        },
+        "posPitchCoords": {
+            "x": -14.919842249145645,
+            "y": -132.03783444658296,
+            "z": 6.639661975638152
+        }
+    },
+    "completedSeriesInDrive": 0,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-30T07:30:51.417Z",
+    "downToGoal": {
+        "meters": -15.062,
+        "yards": -16.472
+    },
+    "downToLineToGain": {
+        "meters": -15.062,
+        "yards": -16.472
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": -7.784,
+            "yards": -8.512
+        },
+        "downToGoal": {
+            "meters": 14.777,
+            "yards": 16.161
+        },
+        "finalBallCentrePos": {
+            "posGlobalCoords": {
+                "x": -2.944596299428328,
+                "y": 20.078882757732874,
+                "z": 0.08525000000000382
+            },
+            "posPitchCoords": {
+                "x": 16.280058167825143,
+                "y": 16.039058104010458,
+                "z": -6.925436821396856
+            }
+        },
+        "lineToGainToGoal": {
+            "meters": 6.994,
+            "yards": 7.648
+        },
+        "offensiveDirection": "Left to Right",
+        "offensiveTeam": "Michigan_Panthers"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Right to Left",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": -15.062,
+        "yards": -16.472
+    }
+}
+
+--second down after turn over
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": 12.850850636667559,
+            "y": -0.7451292797495057,
+            "z": 0.08525000000000027
+        },
+        "posPitchCoords": {
+            "x": 9.613809595774631,
+            "y": -133.22070685647583,
+            "z": 6.806945396100893
+        }
+    },
+    "completedSeriesInDrive": 0,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 2,
+    "downTime": "2024-03-30T07:31:36.268Z",
+    "downToGoal": {
+        "meters": 9.471,
+        "yards": 10.358
+    },
+    "downToLineToGain": {
+        "meters": 9.471,
+        "yards": 10.358
+    },
+    "lastSeriesResult": null,
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Right to Left",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": -15.062,
+        "yards": -16.472
+    }
+}
+
+-- turnover over 10 yards
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": 3.204135916039462,
+            "y": 12.402634770971503,
+            "z": 0.08524999999999672
+        },
+        "posPitchCoords": {
+            "x": -6.504320917059121,
+            "y": -130.76948203141146,
+            "z": 6.460289856897726
+        }
+    },
+    "completedSeriesInDrive": 0,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-30T09:03:02.072Z",
+    "downToGoal": {
+        "meters": -6.647,
+        "yards": -7.269
+    },
+    "downToLineToGain": {
+        "meters": -6.647,
+        "yards": -7.269
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": 1.109,
+            "yards": 1.213
+        },
+        "downToGoal": {
+            "meters": 6.362,
+            "yards": 6.957
+        },
+        "finalBallCentrePos": {
+            "posGlobalCoords": {
+                "x": -1.8785675173595724,
+                "y": 21.819608977492635,
+                "z": 0.08525000000000205
+            },
+            "posPitchCoords": {
+                "x": 16.75714130126564,
+                "y": 14.418577348155438,
+                "z": -8.071289752644248
+            }
+        },
+        "lineToGainToGoal": {
+            "meters": 7.471,
+            "yards": 8.17
+        },
+        "offensiveDirection": "Left to Right",
+        "offensiveTeam": "Michigan_Panthers"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Right to Left",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": -6.647,
+        "yards": -7.269
+    }
+}
+
+--frist down over 10 yards
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": 5.442978267340015,
+            "y": 11.658661366960743,
+            "z": 0.08525000000000205
+        },
+        "posPitchCoords": {
+            "x": 4.395151669448433,
+            "y": 16.05790675663723,
+            "z": -6.912108811308238
+        }
+    },
+    "completedSeriesInDrive": 1,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-30T09:10:35.174Z",
+    "downToGoal": {
+        "meters": 4.253,
+        "yards": 4.651
+    },
+    "downToLineToGain": {
+        "meters": 4.253,
+        "yards": 4.651
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": 0.913,
+            "yards": 0.998
+        },
+        "downToGoal": {
+            "meters": 4.253,
+            "yards": 4.651
+        },
+        "finalBallCentrePos": {
+            "posGlobalCoords": {
+                "x": -0.3574838791784405,
+                "y": 20.080652504609496,
+                "z": 0.08525000000000205
+            },
+            "posPitchCoords": {
+                "x": 14.45194483179195,
+                "y": 14.54436628791975,
+                "z": -7.982343540338635
+            }
+        },
+        "lineToGainToGoal": {
+            "meters": 5.165,
+            "yards": 5.649
+        },
+        "offensiveDirection": "Left to Right",
+        "offensiveTeam": "Michigan_Panthers"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Left to Right",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": 4.253,
+        "yards": 4.651
+    }
+}
+
+--real touchdown
+{
+    "ballCentrePos": {
+        "posGlobalCoords": {
+            "x": 7.9500608906945835,
+            "y": 7.018431744993012,
+            "z": 0.08525000000000205
+        },
+        "posPitchCoords": {
+            "x": -0.6587612864766158,
+            "y": 17.28947975050758,
+            "z": -6.041255195816295
+        }
+    },
+    "completedSeriesInDrive": 1,
+    "description": "Michigan_Panthers @ Michigan_Panthers - YYYY/MM/DD",
+    "downNumber": 1,
+    "downTime": "2024-03-30T09:00:56.271Z",
+    "downToGoal": {
+        "meters": -0.801,
+        "yards": -0.876
+    },
+    "downToLineToGain": {
+        "meters": -0.801,
+        "yards": -0.876
+    },
+    "lastSeriesResult": {
+        "distanceOverLineToGain": {
+            "meters": 4.53,
+            "yards": 4.954
+        },
+        "downToGoal": {
+            "meters": -0.801,
+            "yards": -0.876
+        },
+        "finalBallCentrePos": {
+            "posGlobalCoords": {
+                "x": 0.11550563936030045,
+                "y": 18.521265100535146,
+                "z": 0.08525000000000205
+            },
+            "posPitchCoords": {
+                "x": 13.014837327885186,
+                "y": 15.171598399580773,
+                "z": -7.538823460805168
+            }
+        },
+        "lineToGainToGoal": {
+            "meters": 3.728,
+            "yards": 4.077
+        },
+        "offensiveDirection": "Left to Right",
+        "offensiveTeam": "Michigan_Panthers"
+    },
+    "lineToGainToGoal": {
+        "meters": 0.0,
+        "yards": 0.0
+    },
+    "offenseDirection": "Left to Right",
+    "offensiveTeam": "Michigan_Panthers",
+    "seriesStartPositionToGoal": {
+        "meters": -0.801,
+        "yards": -0.876
+    }
+}
