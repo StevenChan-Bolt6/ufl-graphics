@@ -124,7 +124,7 @@
                                 _line1Text = `OVER BY ${this.handleDistance(downJson.lastSeriesResult.downToGoal.yards)}`
                                 _line2Text = "TOUCH DOWN"
                             }else{
-                                if (downJson.downToGoal.yards < 0){
+                                if (downJson.downToGoal.yards != downJson.lastSeriesResult.downToGoal.yards){
                                     _line1Text = "TURNOVER"
                                     _line2Text = "FIRST DOWN"
                                 }else{

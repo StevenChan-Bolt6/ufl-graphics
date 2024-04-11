@@ -163,7 +163,7 @@
     },
     "offenseDirection": "Right to Left",
     "offensiveTeam": "Michigan_Panthers",
-    "seriesStartPositionToGoal": {
+    "seriesStartPositionToGoal": {       
         "meters": -15.062,
         "yards": -16.472
     }
