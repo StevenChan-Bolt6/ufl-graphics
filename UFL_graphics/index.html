@@ -58,8 +58,8 @@
             <img id="ulf-logo" class="logo" src="images/ufl-logo-white.png">
             <div id="vr" style="border-left:2px solid #FFF;width: 1px;margin-left: 2.5vw;margin-right: 2.5vw;" class="logo" ></div>
             <img id="ulf-logo" class="logo" src="images/bolt6-logo-white.png">
-            <div id="vr" style="border-left:2px solid #FFF;width: 1px;margin-left: 2.5vw;margin-right: 2.5vw;" class="logo" ></div>
-            <img id="ulf-logo" class="logo" v-bind:src="homeTeamLogo">
+            <div id="vr" style="border-left:2px solid #FFF;width: 1px;margin-left: 2.5vw;margin-right: 2.5vw;" class="logo" v-show="showHomeTeamLogo" ></div>
+            <img id="ulf-logo" class="logo" v-bind:src="homeTeamLogo" v-show="showHomeTeamLogo">
         </div>
     </div>
 
@@ -93,6 +93,7 @@
                 line1Text: "",
                 line2Text: "",
                 homeTeamLogo: "",
+                showHomeTeamLogo: true,
                 defaultTimeout: 0,
                 defaultNatsServer: "",
                 defaultNatsTopic: "",
@@ -141,28 +142,19 @@
                         _line2Text = "FIRST DOWN"
                     }
 
-                    //Arlington Renegades
-                    //Birmingham Stallions
-                    //DC Defenders
-                    //Houston Roughnecks
-                    //Memphis Showboats
-                    //Michigan Panthers
-                    //San Antonio Brahmas
-                    //St. Louis Battlehawks
-                    var homeTeamLogoPath = downJson.description.split(' ')[2].trim() + ".png"
-                    this.homeTeamLogo = "images/" + homeTeamLogoPath
                     this.showStandby = false
                     this.line1Text = _line1Text
                     this.line2Text = _line2Text
+                    this.showHomeTeamLogo = false
                     console.log(this.line1Text)
                     console.log(this.line2Text)
-                    console.log(this.homeTeamLogo)
                 },
                 resetText(){
                     console.log('Resetting Text')
                     this.showStandby = true
                     this.line1Text = ""
                     this.line2Text = ""
+                    this.showHomeTeamLogo = true
                 },
                 handleDistance(yards){
                     yards = Math.abs(yards)
@@ -197,7 +189,7 @@
 
                 this.defaultTimeout = params.get("timeout")
                 if (this.defaultTimeout == null) {
-                    this.defaultTimeout = 600
+                    this.defaultTimeout = 300
                 } else {
                     this.defaultTimeout = Number(this.defaultTimeout)
                 }
@@ -205,6 +197,19 @@
                 this.defaultNatsServer = params.get("nats_ws_broker")
                 if (this.defaultNatsServer == null) {
                     this.defaultNatsServer = "ws://localhost:4223"
+                }else{
+                    //-Set Home Team Logo-
+                    //arlingto - Arlington Renegades
+                    //birmingh - Birmingham Stallions
+                    //dc - DC Defenders
+                    //houston - Houston Roughnecks
+                    //memphis - Memphis Showboats
+                    //detroit - Michigan Panthers
+                    //sananton - San Antonio Brahmas
+                    //stlouis - St. Louis Battlehawks
+                    var homeTeamLogoPath = this.defaultNatsServer.split('-')[1].trim() + ".png"
+                    this.homeTeamLogo = "images/" + homeTeamLogoPath
+                    console.log(this.homeTeamLogo)
                 }
 
                 this.defaultNatsTopic = params.get("nats_topic")
