@@ -6,7 +6,7 @@
 </head>
 
 <body style="padding: 0; margin: 0;">
-    <style type="text/css">
+    <style type="text/css" scoped>
         @font-face {
             font-family: 'Tungsten-Book';
             src: url("./fonts/Tungsten-Book.otf") format("opentype");
@@ -42,15 +42,91 @@
             display: inline-block;
         }
         .title{
-            font-size: 15vw;
+            font-size: 12.5vw;
             letter-spacing: 3px;
             width: 100%;
             white-space: nowrap;
         }
+        .connectionStatusRed{
+            font-size: 4vw;
+            color: red;
+        }
+        .connectionStatusGreen{
+            font-size: 4vw;
+            color: green;
+        }
+        .connectionStatusCircleRed{
+            cx: 2.5vw;
+            cy: 2.5vw;
+            r: 1vw;
+            fill: red;
+        }
+        .connectionStatusCircleGreen{
+            cx: 2.5vw;
+            cy: 2.5vw;
+            r: 1vw;
+            fill: green;
+        }
+        .blinking {
+            height: 5vw;
+            width: 5vw;
+            vertical-align: bottom;
+            -webkit-animation: 2s blink ease infinite;
+            -moz-animation: 2s blink ease infinite;
+            -ms-animation: 2s blink ease infinite;
+            -o-animation: 2s blink ease infinite;
+            animation: 2s blink ease infinite;
+        }
+        .connectionErrorText{
+            color: red;
+            font-size: 2vw;
+            letter-spacing: 1px;
+        }
+
+        @keyframes "blink" {
+          from, to {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        @-moz-keyframes blink {
+          from, to {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        @-webkit-keyframes "blink" {
+          from, to {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        @-ms-keyframes "blink" {
+          from, to {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        @-o-keyframes "blink" {
+          from, to {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
     </style>
     <div id="app">
         <div>
-            <span id="standby" class="title" style="font-size: 30vw;" v-show="showStandby">{{ standbyText }}</span>
+            <span id="standby" class="title" style="font-size: 25vw;" v-show="showStandby">{{ standbyText }}</span>
             <span id="line1" class="title">{{ line1Text }} <br/></span>
             <span id="line2" class="title">{{ line2Text }}</span>
         </div>
@@ -60,30 +136,53 @@
             <img id="ulf-logo" class="logo" src="images/bolt6-logo-white.png">
             <div id="vr" style="border-left:2px solid #FFF;width: 1px;margin-left: 2.5vw;margin-right: 2.5vw;" class="logo" v-show="showHomeTeamLogo" ></div>
             <img id="ulf-logo" class="logo" v-bind:src="homeTeamLogo" v-show="showHomeTeamLogo">
+            <div style="width:100%;margin-top: 15px;margin-bottom: 20px;">
+                <span id="connectionStatus" :class="connectionStatus ? 'connectionStatusGreen' : 'connectionStatusRed'">{{ connectionStatusText }}</span>
+                <svg class="blinking">
+                  <circle id="connectionStatusCircle" :class="connectionStatus ? 'connectionStatusCircleGreen' : 'connectionStatusCircleRed'" />
+                </svg> 
+            </div>
+            <div style="width:100%;margin-bottom: 20px;">
+                <span id="connectionErrorText" class="connectionErrorText" v-show="!connectionStatus">{{ connectionErrorText }}</span>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script type="module">
-        import { connect, StringCodec } from "/js/nats.js"
+    <script src="./js/vue.min.js"></script>
+    <script type="module" setup>
 
-        const natsInit = async function (connectionURL, topic, callback) {
+        import { connect, StringCodec } from "./js/nats.js"
+
+        
+        const natsInit = async function (connectionURL, topic, callback, statusCallback) {
             console.log(`Connecting to Nats: ${connectionURL}`)
             const conn = await connect({
                 servers: connectionURL
-            }) 
+            })
 
-            console.log(`Connected to Nats: ${connectionURL}`)
-            const sc = StringCodec()
-            const sub = conn.subscribe(topic)
+            console.log(`Connected to Nats: ${connectionURL}`);
+            const sc = StringCodec();
+            const sub = conn.subscribe(topic);
 
-            console.log(`subscribing on topic: ${topic}`)
+            console.log(`subscribing on topic: ${topic}`);
 
-            console.log(`Waiting for messages`)
+            console.log(`Checking Connection Status`);
+            (async () => {
+              console.info(`connected ${conn.getServer()}`);
+              statusCallback('connected');
+              for await (const s of conn.status()) {
+                console.info(`${s.type}: ${s.data}`);
+                statusCallback(s.type);
+              }
+            })().then();
+
+            console.log(`Waiting for messages`);
             for await (const m of sub) {
-                callback(sc.decode(m.data))
+                callback(sc.decode(m.data));
             }
         }
+        
+        
 
         new Vue({
             el: '#app',
@@ -94,6 +193,9 @@
                 line2Text: "",
                 homeTeamLogo: "",
                 showHomeTeamLogo: true,
+                connectionStatusText: "Disconnected",
+                connectionStatus: false,
+                connectionErrorText: "",
                 defaultTimeout: 0,
                 defaultNatsServer: "",
                 defaultNatsTopic: "",
@@ -119,7 +221,7 @@
                         break;
                     }
                     if (downJson.downNumber == 1 && downJson.lastSeriesResult != null){
-                        if (downJson.lastSeriesResult.distanceOverLineToGain.yards < 0){
+                        if (downJson.offensiveTeam != downJson.lastSeriesResult.offensiveTeam){
                             //_line1Text = `SHORT BY ${this.handleDistance(downJson.lastSeriesResult.distanceOverLineToGain.yards)}`
                             _line1Text = "TURNOVER"
                             _line2Text = "FIRST DOWN"
@@ -128,8 +230,8 @@
                                 _line1Text = `OVER BY ${this.handleDistance(downJson.lastSeriesResult.downToGoal.yards)}`
                                 _line2Text = "TOUCH DOWN"
                             }else{
-                                if (downJson.downToGoal.yards != downJson.lastSeriesResult.downToGoal.yards){
-                                    _line1Text = "TURNOVER"
+                                if (downJson.offensiveDirection != downJson.lastSeriesResult.offensiveDirection){
+                                    _line1Text = `OVER BY ${this.handleDistance(downJson.lastSeriesResult.lineToGainToGoal.yards - downJson.downToGoal.yards)}`
                                     _line2Text = "FIRST DOWN"
                                 }else{
                                     _line1Text = `OVER BY ${this.handleDistance(downJson.lastSeriesResult.distanceOverLineToGain.yards)}`
@@ -164,6 +266,18 @@
                     }else{
                         var yards = Math.round(yards)
                         return `${yards} YARDS`
+                    }
+                },
+                setConnectionStatus(statusType){
+                    console.log(statusType);
+                    if (statusType == "connected" || statusType == "reconnect" || statusType == "pingTimer") {
+                        this.connectionStatus = true;
+                        this.connectionStatusText = "Connected"
+                        this.connectionErrorText = ""
+                    }else{
+                        this.connectionStatus = false;
+                        this.connectionStatusText = "Disconnected"
+                        this.connectionErrorText = "Please make sure you are connecting to internet"
                     }
                 },
                 handleNatsMessage(payload){
@@ -217,9 +331,12 @@
                     this.defaultNatsTopic = "external.ball-spotting"
                 }
 
-                natsInit(this.defaultNatsServer, this.defaultNatsTopic, this.handleNatsMessage)
+                natsInit(this.defaultNatsServer, this.defaultNatsTopic, this.handleNatsMessage, this.setConnectionStatus)
                     .catch(err => {
-                        console.log(err)
+                        console.log(err);
+                        console.log(err.code);
+                        this.setConnectionStatus("disconnect")
+                        this.connectionErrorText = "Please make sure the URL is using 'http://' and 'ws://'"
                     })
             },
         })
