@@ -7,6 +7,10 @@
 
 <body style="padding: 0; margin: 0;">
     <style type="text/css" scoped>
+        :root {
+          --bg-color: black;
+          --text-color: white;
+        }
         @font-face {
             font-family: 'Tungsten-Book';
             src: url("./fonts/Tungsten-Book.otf") format("opentype");
@@ -29,8 +33,8 @@
             width: 100vw; 
             padding: 0; 
             margin: 0;
-            background-color: black;
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: Tungsten-Book;
             display: inline-grid;
             align-content: space-evenly;
@@ -199,6 +203,9 @@
                 defaultTimeout: 0,
                 defaultNatsServer: "",
                 defaultNatsTopic: "",
+                defaultFlashyTime: 0,
+                defaultCloseDistance: 0,
+                defaultSuperCloseDistance: 0,
                 timeout: null
             },
             methods: {
@@ -257,16 +264,38 @@
                     this.line1Text = ""
                     this.line2Text = ""
                     this.showHomeTeamLogo = true
+                    const root = document.documentElement;
+                    root.style.setProperty('--text-color', 'white')
                 },
                 handleDistance(yards){
                     yards = Math.abs(yards)
+                    var inches = Math.round((yards*36) * 10) / 10
+                    //Flash Green <= 30 inches, Red <= 6 inches.
+                    if (inches <= this.defaultCloseDistance){
+                        if (inches <= this.defaultSuperCloseDistance){
+                            this.flashy('red');
+                        }else{
+                            this.flashy('green');
+                        }
+                    }
                     if (yards<1){
-                        var inches = Math.round((yards*36) * 10) / 10
                         return `${inches} INCHES`
                     }else{
                         var yards = Math.round(yards)
                         return `${yards} YARDS`
                     }
+                },
+                flashy(color){
+                    const root = document.documentElement;
+                    var intervalId = setInterval(() => {
+                        if (root.style.getPropertyValue('--text-color') == 'white'){
+                            root.style.setProperty('--text-color', color);
+                        }else {
+                            root.style.setProperty('--text-color', 'white');
+                        }
+                    }, 500);
+                    setTimeout(() => clearInterval(intervalId), this.defaultFlashyTime*1000);
+                    setTimeout(() => root.style.setProperty('--text-color', 'white'), this.defaultFlashyTime*1000 + 500);
                 },
                 setConnectionStatus(statusType){
                     console.log(statusType);
@@ -331,6 +360,19 @@
                     this.defaultNatsTopic = "external.ball-spotting"
                 }
 
+                this.defaultFlashyTime = params.get("flashy_time")
+                if (this.defaultFlashyTime == null) {
+                    this.defaultFlashyTime = 5
+                }
+                this.defaultCloseDistance = params.get("close")
+                if (this.defaultCloseDistance == null) {
+                    this.defaultCloseDistance = 30
+                }
+                this.defaultSuperCloseDistance = params.get("super_close")
+                if (this.defaultSuperCloseDistance == null) {
+                    this.defaultSuperCloseDistance = 6
+                }
+                console.log(this.defaultSuperCloseDistance)
                 natsInit(this.defaultNatsServer, this.defaultNatsTopic, this.handleNatsMessage, this.setConnectionStatus)
                     .catch(err => {
                         console.log(err);
@@ -338,6 +380,9 @@
                         this.setConnectionStatus("disconnect")
                         this.connectionErrorText = "Please make sure the URL is using 'http://' and 'ws://'"
                     })
+
+                //var demoJson = '{"completedSeriesInDrive":0,"description":"PhiladelphiaStars@MichiganPanthers-YYYY/MM/DD","downNumber":4,"downTime":"2024-03-18T07:06:56.957Z","downToGoal":{"meters":11.892,"yards":13.006},"downToLineToGain":{"meters":9.144,"yards":0.20},"lastSeriesResult":null,"lineToGainToGoal":{"meters":2.748,"yards":3.006},"offenseDirection":"LefttoRight","offensiveTeam":"MichiganPanthers","seriesStartPositionToGoal":{"meters":11.892,"yards":13.006}}'
+                //this.setText(demoJson)
             },
         })
     </script>
